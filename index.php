@@ -2,8 +2,15 @@
 
 require_once 'vendor/autoload.php';
 
-$json = new \App\Decorator\ChoiceType(
-    new \App\Decorator\InputGroupType()
-);
+$form = new \App\Composite\Form();
 
-echo $json->render();
+$emailInput = new \App\Composite\InputElement();
+$emailInput->setClassess(['email', 'text', 'form-validate']);
+
+$form
+    ->setClassess(['registration-form'])
+    ->addLement($emailInput)
+    ->addLement(new \App\Composite\InputElement())
+    ->addLement(new \App\Composite\InputElement());
+
+echo $form->render();
