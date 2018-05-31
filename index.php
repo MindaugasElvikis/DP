@@ -2,15 +2,14 @@
 
 require_once 'vendor/autoload.php';
 
-$form = new \App\Composite\Form();
+$receiver = new \App\Command\Receiver();
 
-$emailInput = new \App\Composite\InputElement();
-$emailInput->setClassess(['email', 'text', 'form-validate']);
+$invoker = new \App\Command\Invoker($receiver);
+$invoker->setCommands([
+    'app:hello_world' => \App\Command\HelloWorldCommand::class,
+    'app:bye_world'   => \App\Command\ByeWorldCommand::class,
+]);
 
-$form
-    ->setClassess(['registration-form'])
-    ->addLement($emailInput)
-    ->addLement(new \App\Composite\InputElement())
-    ->addLement(new \App\Composite\InputElement());
+$invoker->run('app:bye_world');
 
-echo $form->render();
+echo $receiver->getOutput();
