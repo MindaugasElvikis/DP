@@ -7,6 +7,8 @@ namespace App\Command;
  */
 class HelloWorldCommand extends BaseCommand
 {
+    const NAME = 'app:hello_world';
+
     /**
      * @return void
      */
